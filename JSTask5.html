@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form{
+            margin: 30px;
+        }
+        td:nth-child(odd){
+            text-align: right;
+        }
+        td {
+            padding-bottom:20px;
+        }
+        span {
+            margin-left: 15px;
+            color: red;
+        }
+        .invisible {
+            display: none;
+        }
+        .red {
+            border: 3px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <form onsubmit="return validation()">
+        <table>
+            <tr>
+                <td>
+                    <label>Name: </label>
+                </td>
+                <td>
+                    <input id="i1" type="text">
+                    <span id="s1" class="invisible">This field is requred</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Email: </label>
+                </td>
+                <td>
+                    <input id="i2" type="email">
+                    <span id="s2" class="invisible">A valid email address is required</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Website: </label>
+                </td>
+                <td>
+                    <input id="i3" type="url">
+                    <span id="s3" class="invisible">A valid url is required</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top;">
+                    <label>Message: </label>
+                </td>
+                <td>
+                    <textarea id="i4" name="" cols="25" rows="4"></textarea>
+                    <span id="s4" class="invisible" style="vertical-align: top;">This field is requred</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: left;">
+                    <button style="margin-left: 55px;" type="submit"> Submit</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+        function validation() {
+            let i = [document.getElementById("i1"), document.getElementById("i2"), document.getElementById("i3"), document.getElementById("i4")];
+            let s = [document.getElementById("s1"), document.getElementById("s2"), document.getElementById("s3"), document.getElementById("s4")];
+            let flag = 1;
+
+            for (let j=0; j<4; j++) {
+                if (i[j].value=="") {
+                    i[j].classList.add("red");
+                    s[j].classList.remove("invisible");
+                    flag = 0;
+                }
+                else {
+                    i[j].classList.remove("red");
+                    s[j].classList.add("invisible");
+                }
+            }
+            
+            if (flag == 0) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+    </script>
+</body>
+
+</html>

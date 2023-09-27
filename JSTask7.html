@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        img {
+            position: relative;
+            animation: moveRight 5s;
+            animation-play-state: paused;
+        }
+        @keyframes moveRight {
+            from {
+                left: 0px;
+            }
+            to {
+                left: 80%;
+            }
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    <img id="image" src="./Train.jpg" width="300px" alt="">
+    <center>
+        <h2 style="color: darkblue;">Click the following buttons to handle animation</h2>
+        <button onclick="start()">Start</button>
+        <button onclick="pause()">Stop</button>
+    </center>
+    <script>
+        i = document.getElementById("image");
+        function start() {
+            i.style.animationPlayState = "running";
+        }
+        function pause() {
+            i.style.animationPlayState = "paused";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 800px;
+        }
+        td {
+            padding: 10px;
+            width: 400px;
+        }
+        th {
+            text-align: end;
+            width: 200px;
+        }
+        .textBox {
+            width: 98.5%;
+        }
+        textarea {
+            width: 98.5%;
+            height: 100px;
+        }
+        h1 {
+            color: blue; 
+        }
+        form {
+            background-image: radial-gradient(circle at top ,lightyellow, pink 70%);
+            width: 800px;
+            padding-top: 10px;
+            padding-bottom: 20px;
+        }
+        input[type = "submit"] {
+            background-color: red;
+            border-radius: 50px;
+            border: 3px solid black;
+            padding: 0 10px;
+            color: white;
+            font-weight: bold;
+        }
+        .msg-span {
+            color: red;
+        }
+        .msg {
+            width: 170px;
+        }
+        .invisible {
+            display: none;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <form action="" onsubmit="return validate()">
+            <h1>Registration form</h1>
+            <table>
+                <tr>
+                    <th><label for="fn">First Name</label></th>
+                    <td><input onkeyup="check(this)" class="textBox" type="text" name="fn"/></td>
+                    <td class="msg"><span class="msg-span">POOR</span></td>
+                </tr>
+                <tr>
+                    <th><label for="ln">Last Name</label></th>
+                    <td><input onkeyup="check(this)" class="textBox" type="text" name="ln"/></td>
+                    <td class="msg"><span class="msg-span">POOR</span></td>
+                </tr>        
+                <tr>
+                    <th><label for="em">Email</label></th>
+                    <td><input onkeyup="checkEmail(this)" class="textBox" type="email" name="em"/></td>
+                    <td class="msg"><span class="msg-span">POOR</span></td>
+                </tr>        
+                <tr>
+                    <th><label for="pw">Password</label></th>
+                    <td><input id="pw" onkeyup="checkpw(this)" class="textBox" type="password" name="pw"/></td>
+                    <td class="msg"><span class="msg-span">POOR</span></td>
+                </tr>        
+                <tr>
+                    <th><label for="rpw">Re-enter Password</label></th>
+                    <td><input id="rpw" onkeyup="checkrpw(this)" class="textBox" type="password" name="rpw"/></td>
+                    <td class="msg"><span class="msg-span">POOR OR MISMATCH</span></td>
+                </tr>        
+                <tr>
+                    <th><label for="gender">Gender:</label></th>
+                    <td>
+                        <input type="radio" name="gender" style="margin-bottom: 20px;" checked/>Male
+                        <br>
+                        <input type="radio" name="gender"/>Female
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="age">Age:</label></th>
+                    <td><input onkeyup="check(this)" class="textBox" type="number" name="age"></td>
+                    <td id="age" class="msg"><span class="msg-span">POOR</span></td>
+                </tr>        
+                <tr>
+                    <th><label for="pn">Phone Number</label></th>
+                    <td><input onkeyup="checkPhone(this)" class="textBox" type="tel" name="tn"/></td>
+                    <td class="msg"><span class="msg-span">POOR</span></td>
+                </tr>
+                <tr>
+                    <th><label for="addr">Address</label></th>
+                    <td><textarea onkeyup="check(this)" name="addr" ></textarea></td>
+                    <td class="msg"><span class="msg-span">POOR</span></td>
+                </tr>
+                <tr>
+                    <th><label for="state">State</label></th>
+                    <td><input onkeyup="check(this)" class="textBox" type="text" name="state"/></td>
+                    <td class="msg"><span class="msg-span">POOR</span></td>
+                </tr>
+                <tr>
+                    <th><label for="country">Country</label></th>
+                    <td>
+                        <select name="country">
+                            <option value="none" selected disabled hidden>Choose your country</option></th>
+                            <option value="Brazil">Brazil</option></th>
+                            <option value="India">India</option>
+                            <option value="Japan">Japan</option>
+                            <option value="Nepal">Nepal</option>
+                            <option value="Pakistan">Pakistan</option>
+                            <option value="Russia">Russia</option>
+                            <option value="Sri Lanka">Sri Lanka</option>
+                            <option value="United States of Amerca">United States of America</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="lang">Languages known</label></th>
+                    <td>
+                        <input type="checkbox" name="lang"/>English
+                        <input type="checkbox" name="lang"/>Kannada
+                        <input type="checkbox" name="lang"/>Hindi
+                        <input type="checkbox" name="lang"/>Telungu
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="checkbox" checked required/> Hereby I declare all the given details are true
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="right">
+                        Log in to <a href="https://ethnus.com/">Ethnus</a> website
+                    </td>
+                </tr>
+            </table>
+            <input style="margin-top: 15px;" type="submit" value="REGISTER">
+        </form>
+    </center>
+    <script>
+        function check(x) {
+            let sib = x.parentElement.nextElementSibling.children[0];
+            if (x.value=="") {
+                sib.classList.remove("invisible");
+                return false;
+            }
+            else {
+                if (!sib.classList.contains("invisible"))
+                    sib.classList.add("invisible");
+                return true;
+            }
+        }
+
+        function checkpw(x) {
+            let sib = x.parentElement.nextElementSibling.children[0];
+            let i = 0;
+            if(!validpw(x.value)) {
+                sib.classList.remove("invisible");
+                i=0;
+            }
+            else {
+                if(!sib.classList.contains("invisible"))
+                    sib.classList.add("invisible");
+                i=1;
+            }
+            checkrpw(document.getElementById("rpw"));
+            if (i==1)
+                return true;
+            else
+                return false;
+        }
+
+        function checkrpw(x) {
+            let sib = x.parentElement.nextElementSibling.children[0];
+            let pw = document.getElementById("pw").value;
+
+            if (x.value!=pw || !validpw(x.value)) {
+                sib.classList.remove("invisible");
+                return false;
+            }
+            else  {
+                if (!sib.classList.contains("invisible"))
+                    sib.classList.add("invisible");
+                return true;
+            }
+        }
+
+        function checkPhone(x) {
+            let sib = x.parentElement.nextElementSibling.children[0];
+            if (!/^[0-9]{10}$/.test(x.value)) {
+                sib.classList.remove("invisible");
+                return false;
+            }
+            else {
+                if (!sib.classList.contains("invisible"))
+                    sib.classList.add("invisible");
+                return true;
+            }
+        }
+
+        function checkEmail(x) {
+            let sib = x.parentElement.nextElementSibling.children[0];
+            if (!validEmail(x.value)) {
+                sib.classList.remove("invisible");
+                return false;
+            }
+            else {
+                if (!sib.classList.contains("invisible"))
+                    sib.classList.add("invisible");
+                return true;
+            }
+        }
+
+        function validEmail(x) {
+            return /^[a-z0-9]+@[a-z]+\.[a-z]+$/.test(x);
+        }
+
+        function validpw(x) {
+            return /[A-Z]/.test(x) && /[a-z]/.test(x) && /[0-9]/.test(x) && /[`!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?~ ]/.test(x);
+        }
+
+        function validate() {
+            const inp = document.getElementsByTagName("input");
+            for (let i=0; i<inp.length; i++) {
+                if (inp[i].type == "text") {
+                    if (!check(inp[i]))
+                        return false;
+                }
+                else if (inp[i].type == "email") {
+                    if (!checkEmail(inp[i]))
+                        return false;
+                }
+                else if (inp[i].type == "tel") {
+                    if (!checkPhone(inp[i]))
+                        return false;
+                }
+                else if (inp[i].id == "pw") {
+                    if (!checkpw(inp[i]))
+                        return false;
+                }
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

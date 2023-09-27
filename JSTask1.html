@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label>number : </label>
+    <input id="num" type="number">
+    <button onclick="myFunction()">Submit</button>
+    <p>Expected Output : <span id="out"></span></p>
+    <script>
+        function revInt(x) {
+            var y = 0;
+            while(x!=0) {
+                y=(y*10)+(x%10);
+                x=Math.floor(x/10);
+            }
+            return y;
+        }
+        function myFunction(){
+            var x = document.getElementById("num").value;
+            document.getElementById("out").innerHTML = revInt(x);
+        }
+    </script>    
+</body>
+</html>
