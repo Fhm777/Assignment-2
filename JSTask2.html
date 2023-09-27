@@ -11,16 +11,12 @@
     <button onclick="myFunction()">Submit</button>
     <p>Expected Output : <span id="out"></span></p>
     <script>
-        function rev(x) {
-            var y = "";
-            for (let i=x.length-1; i>=0; i--) {
-                y+=x[i];
-            }
-            return y;
+        function ordered(x) {
+            return x.split("").sort().join("");
         }
         function myFunction(){
             var x = document.getElementById("str").value;
-            document.getElementById("out").innerHTML = rev(x);
+            document.getElementById("out").innerHTML = ordered(x);
         }
     </script>    
 </body>
